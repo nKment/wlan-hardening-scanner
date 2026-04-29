@@ -1,0 +1,5 @@
+auth_mode: "wpa2_psk"
+wps_disabled: false
+vlans_present: []
+management_network_configured: false
+ssid_to_vlan_mapping: {}
