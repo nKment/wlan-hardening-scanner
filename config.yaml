@@ -1,0 +1,36 @@
+profiles:
+  baseline:
+    expected_subnet: "192.168.1.0/24"
+    expected_gateway: "192.168.1.1"
+    external_test_ip: "8.8.8.8"
+    discovery_subnet: "192.168.1.0/24"
+    management_gateway: null
+    management_hosts:
+      - "192.168.1.101"
+
+  hardened_internal:
+    expected_subnet: "192.168.20.0/24"
+    expected_gateway: "192.168.20.1"
+    external_test_ip: "8.8.8.8"
+    discovery_subnet: "192.168.20.0/24"
+    management_gateway: "192.168.99.1"
+    management_hosts:
+      - "192.168.99.2"
+      - "192.168.99.3"
+
+  hardened_guest:
+    expected_subnet: "192.168.30.0/24"
+    expected_gateway: "192.168.30.1"
+    external_test_ip: "8.8.8.8"
+    discovery_subnet: "192.168.30.0/24"
+    management_gateway: "192.168.99.1"
+    management_hosts:
+      - "192.168.99.2"
+      - "192.168.99.3"
+
+weights:
+  authentication_and_encryption: 3
+  management_access_control: 3
+  network_segmentation: 2
+  network_exposure: 2
+  known_insecure_features_or_vulnerabilities: 3
