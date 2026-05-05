@@ -1,0 +1,212 @@
+{
+  "profile": "hardened_guest",
+  "results": {
+    "wifi": {
+      "raw": {
+        "command": "networksetup -getinfo Wi-Fi",
+        "returncode": 0,
+        "stdout": "DHCP Configuration\nIP address: 192.168.30.100\nSubnet mask: 255.255.255.0\nRouter: 192.168.30.1\nClient ID: \nIPv6: Automatic\nIPv6 IP address: none\nIPv6 Router: none\nWi-Fi ID: 3c:06:30:3a:bb:72",
+        "stderr": "",
+        "ok": true
+      },
+      "ip_address": "192.168.30.100",
+      "router": "192.168.30.1",
+      "subnet_mask": "255.255.255.0"
+    },
+    "ip_in_expected_subnet": true,
+    "gateway_matches_expected": true,
+    "gateway_ping": {
+      "host": "192.168.30.1",
+      "success": true,
+      "packet_loss_percent": 0.0,
+      "avg_ms": 22.158,
+      "raw": {
+        "command": "ping -c 4 192.168.30.1",
+        "returncode": 0,
+        "stdout": "PING 192.168.30.1 (192.168.30.1): 56 data bytes\n64 bytes from 192.168.30.1: icmp_seq=0 ttl=64 time=73.761 ms\n64 bytes from 192.168.30.1: icmp_seq=1 ttl=64 time=4.577 ms\n64 bytes from 192.168.30.1: icmp_seq=2 ttl=64 time=4.689 ms\n64 bytes from 192.168.30.1: icmp_seq=3 ttl=64 time=5.604 ms\n\n--- 192.168.30.1 ping statistics ---\n4 packets transmitted, 4 packets received, 0.0% packet loss\nround-trip min/avg/max/stddev = 4.577/22.158/73.761/29.796 ms",
+        "stderr": "",
+        "ok": true
+      }
+    },
+    "external_ping": {
+      "host": "8.8.8.8",
+      "success": false,
+      "packet_loss_percent": 100.0,
+      "avg_ms": null,
+      "raw": {
+        "command": "ping -c 4 8.8.8.8",
+        "returncode": 2,
+        "stdout": "PING 8.8.8.8 (8.8.8.8): 56 data bytes\n92 bytes from 192.168.30.1: Destination Net Unreachable\nVr HL TOS  Len   ID Flg  off TTL Pro  cks      Src      Dst\n 4  5  00 5400 29fc   0 0000  40  01 6191 192.168.30.100  8.8.8.8 \n\nRequest timeout for icmp_seq 0\n92 bytes from 192.168.30.1: Destination Net Unreachable\nVr HL TOS  Len   ID Flg  off TTL Pro  cks      Src      Dst\n 4  5  00 5400 3386   0 0000  40  01 5807 192.168.30.100  8.8.8.8 \n\nRequest timeout for icmp_seq 1\n92 bytes from 192.168.30.1: Destination Net Unreachable\nVr HL TOS  Len   ID Flg  off TTL Pro  cks      Src      Dst\n 4  5  00 5400 e6a8   0 0000  40  01 a4e4 192.168.30.100  8.8.8.8 \n\nRequest timeout for icmp_seq 2\n92 bytes from 192.168.30.1: Destination Net Unreachable\nVr HL TOS  Len   ID Flg  off TTL Pro  cks      Src      Dst\n 4  5  00 5400 f4cb   0 0000  40  01 96c1 192.168.30.100  8.8.8.8 \n\n\n--- 8.8.8.8 ping statistics ---\n4 packets transmitted, 0 packets received, 100.0% packet loss",
+        "stderr": "",
+        "ok": false
+      }
+    },
+    "management_gateway_ping": {
+      "host": "192.168.99.1",
+      "success": true,
+      "packet_loss_percent": 0.0,
+      "avg_ms": 8.553,
+      "raw": {
+        "command": "ping -c 4 192.168.99.1",
+        "returncode": 0,
+        "stdout": "PING 192.168.99.1 (192.168.99.1): 56 data bytes\n64 bytes from 192.168.99.1: icmp_seq=0 ttl=64 time=10.532 ms\n64 bytes from 192.168.99.1: icmp_seq=1 ttl=64 time=15.652 ms\n64 bytes from 192.168.99.1: icmp_seq=2 ttl=64 time=4.222 ms\n64 bytes from 192.168.99.1: icmp_seq=3 ttl=64 time=3.807 ms\n\n--- 192.168.99.1 ping statistics ---\n4 packets transmitted, 4 packets received, 0.0% packet loss\nround-trip min/avg/max/stddev = 3.807/8.553/15.652/4.889 ms",
+        "stderr": "",
+        "ok": true
+      }
+    },
+    "management_hosts": [
+      {
+        "host": "192.168.99.2",
+        "ping": {
+          "host": "192.168.99.2",
+          "success": false,
+          "packet_loss_percent": 100.0,
+          "avg_ms": null,
+          "raw": {
+            "command": "ping -c 4 192.168.99.2",
+            "returncode": 2,
+            "stdout": "PING 192.168.99.2 (192.168.99.2): 56 data bytes\nRequest timeout for icmp_seq 0\nRequest timeout for icmp_seq 1\nRequest timeout for icmp_seq 2\n\n--- 192.168.99.2 ping statistics ---\n4 packets transmitted, 0 packets received, 100.0% packet loss",
+            "stderr": "",
+            "ok": false
+          }
+        },
+        "ports": {
+          "host": "192.168.99.2",
+          "ports": [
+            80,
+            443
+          ],
+          "states": {
+            "80": "filtered",
+            "443": "filtered"
+          },
+          "raw": {
+            "command": "nmap -Pn -p 80,443 192.168.99.2",
+            "returncode": 0,
+            "stdout": "Starting Nmap 7.99 ( https://nmap.org ) at 2026-05-05 12:00 +0200\nNmap scan report for 192.168.99.2\nHost is up.\n\nPORT    STATE    SERVICE\n80/tcp  filtered http\n443/tcp filtered https\n\nNmap done: 1 IP address (1 host up) scanned in 3.56 seconds",
+            "stderr": "",
+            "ok": true
+          }
+        }
+      },
+      {
+        "host": "192.168.99.3",
+        "ping": {
+          "host": "192.168.99.3",
+          "success": false,
+          "packet_loss_percent": 100.0,
+          "avg_ms": null,
+          "raw": {
+            "command": "ping -c 4 192.168.99.3",
+            "returncode": 2,
+            "stdout": "PING 192.168.99.3 (192.168.99.3): 56 data bytes\nRequest timeout for icmp_seq 0\nRequest timeout for icmp_seq 1\nRequest timeout for icmp_seq 2\n\n--- 192.168.99.3 ping statistics ---\n4 packets transmitted, 0 packets received, 100.0% packet loss",
+            "stderr": "",
+            "ok": false
+          }
+        },
+        "ports": {
+          "host": "192.168.99.3",
+          "ports": [
+            80,
+            443
+          ],
+          "states": {
+            "80": "filtered",
+            "443": "filtered"
+          },
+          "raw": {
+            "command": "nmap -Pn -p 80,443 192.168.99.3",
+            "returncode": 0,
+            "stdout": "Starting Nmap 7.99 ( https://nmap.org ) at 2026-05-05 12:01 +0200\nNmap scan report for 192.168.99.3\nHost is up.\n\nPORT    STATE    SERVICE\n80/tcp  filtered http\n443/tcp filtered https\n\nNmap done: 1 IP address (1 host up) scanned in 3.56 seconds",
+            "stderr": "",
+            "ok": true
+          }
+        }
+      }
+    ],
+    "arp": {
+      "count": 4,
+      "ips": [
+        "192.168.30.1",
+        "192.168.30.101",
+        "192.168.30.255",
+        "224.0.0.251"
+      ],
+      "raw": {
+        "command": "arp -a",
+        "returncode": 0,
+        "stdout": "? (192.168.30.1) at 6c:4c:bc:a8:aa:3c on en0 ifscope [ethernet]\n? (192.168.30.101) at (incomplete) on en0 ifscope [ethernet]\n? (192.168.30.255) at ff:ff:ff:ff:ff:ff on en0 ifscope [ethernet]\nmdns.mcast.net (224.0.0.251) at 1:0:5e:0:0:fb on en0 ifscope permanent [ethernet]",
+        "stderr": "",
+        "ok": true
+      }
+    },
+    "discovery": {
+      "subnet": "192.168.30.0/24",
+      "hosts_up": 1,
+      "hosts": [
+        "192.168.30.1"
+      ],
+      "raw": {
+        "command": "nmap -sn -n 192.168.30.0/24",
+        "returncode": 0,
+        "stdout": "Starting Nmap 7.99 ( https://nmap.org ) at 2026-05-05 12:01 +0200\nNmap scan report for 192.168.30.1\nHost is up (0.0083s latency).\nNmap done: 256 IP addresses (1 host up) scanned in 22.03 seconds",
+        "stderr": "",
+        "ok": true
+      }
+    },
+    "profile": "hardened_guest"
+  },
+  "observed": {
+    "auth_mode": "wpa3_only",
+    "wps_disabled": true,
+    "vlans_present": [
+      20,
+      30,
+      99
+    ],
+    "management_network_configured": true,
+    "ssid_to_vlan_mapping": {
+      "SME-Internal": 20,
+      "SME-Guest": 30
+    }
+  },
+  "category_scores": {
+    "authentication_and_encryption": 3,
+    "management_access_control": 2,
+    "network_segmentation": 3,
+    "network_exposure": 2,
+    "known_insecure_features_or_vulnerabilities": 3
+  },
+  "weighted_scores": {
+    "categories": {
+      "authentication_and_encryption": {
+        "score": 3,
+        "weight": 3,
+        "weighted_value": 9
+      },
+      "management_access_control": {
+        "score": 2,
+        "weight": 3,
+        "weighted_value": 6
+      },
+      "network_segmentation": {
+        "score": 3,
+        "weight": 2,
+        "weighted_value": 6
+      },
+      "network_exposure": {
+        "score": 2,
+        "weight": 2,
+        "weighted_value": 4
+      },
+      "known_insecure_features_or_vulnerabilities": {
+        "score": 3,
+        "weight": 3,
+        "weighted_value": 9
+      }
+    },
+    "total": 34,
+    "max_score": 39,
+    "percentage_of_max": 87.2
+  }
+}

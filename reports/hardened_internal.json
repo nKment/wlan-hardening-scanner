@@ -1,0 +1,213 @@
+{
+  "profile": "hardened_internal",
+  "results": {
+    "wifi": {
+      "raw": {
+        "command": "networksetup -getinfo Wi-Fi",
+        "returncode": 0,
+        "stdout": "DHCP Configuration\nIP address: 192.168.20.101\nSubnet mask: 255.255.255.0\nRouter: 192.168.20.1\nClient ID: \nIPv6: Automatic\nIPv6 IP address: none\nIPv6 Router: none\nWi-Fi ID: 3c:06:30:3a:bb:72",
+        "stderr": "",
+        "ok": true
+      },
+      "ip_address": "192.168.20.101",
+      "router": "192.168.20.1",
+      "subnet_mask": "255.255.255.0"
+    },
+    "ip_in_expected_subnet": true,
+    "gateway_matches_expected": true,
+    "gateway_ping": {
+      "host": "192.168.20.1",
+      "success": true,
+      "packet_loss_percent": 0.0,
+      "avg_ms": 28.618,
+      "raw": {
+        "command": "ping -c 4 192.168.20.1",
+        "returncode": 0,
+        "stdout": "PING 192.168.20.1 (192.168.20.1): 56 data bytes\n64 bytes from 192.168.20.1: icmp_seq=0 ttl=64 time=9.647 ms\n64 bytes from 192.168.20.1: icmp_seq=1 ttl=64 time=25.970 ms\n64 bytes from 192.168.20.1: icmp_seq=2 ttl=64 time=74.669 ms\n64 bytes from 192.168.20.1: icmp_seq=3 ttl=64 time=4.186 ms\n\n--- 192.168.20.1 ping statistics ---\n4 packets transmitted, 4 packets received, 0.0% packet loss\nround-trip min/avg/max/stddev = 4.186/28.618/74.669/27.769 ms",
+        "stderr": "",
+        "ok": true
+      }
+    },
+    "external_ping": {
+      "host": "8.8.8.8",
+      "success": true,
+      "packet_loss_percent": 0.0,
+      "avg_ms": 52.684,
+      "raw": {
+        "command": "ping -c 4 8.8.8.8",
+        "returncode": 0,
+        "stdout": "PING 8.8.8.8 (8.8.8.8): 56 data bytes\n64 bytes from 8.8.8.8: icmp_seq=0 ttl=117 time=106.993 ms\n64 bytes from 8.8.8.8: icmp_seq=1 ttl=117 time=21.511 ms\n64 bytes from 8.8.8.8: icmp_seq=2 ttl=117 time=49.916 ms\n64 bytes from 8.8.8.8: icmp_seq=3 ttl=117 time=32.318 ms\n\n--- 8.8.8.8 ping statistics ---\n4 packets transmitted, 4 packets received, 0.0% packet loss\nround-trip min/avg/max/stddev = 21.511/52.684/106.993/32.953 ms",
+        "stderr": "",
+        "ok": true
+      }
+    },
+    "management_gateway_ping": {
+      "host": "192.168.99.1",
+      "success": true,
+      "packet_loss_percent": 0.0,
+      "avg_ms": 5.967,
+      "raw": {
+        "command": "ping -c 4 192.168.99.1",
+        "returncode": 0,
+        "stdout": "PING 192.168.99.1 (192.168.99.1): 56 data bytes\n64 bytes from 192.168.99.1: icmp_seq=0 ttl=64 time=4.139 ms\n64 bytes from 192.168.99.1: icmp_seq=1 ttl=64 time=3.988 ms\n64 bytes from 192.168.99.1: icmp_seq=2 ttl=64 time=3.619 ms\n64 bytes from 192.168.99.1: icmp_seq=3 ttl=64 time=12.122 ms\n\n--- 192.168.99.1 ping statistics ---\n4 packets transmitted, 4 packets received, 0.0% packet loss\nround-trip min/avg/max/stddev = 3.619/5.967/12.122/3.559 ms",
+        "stderr": "",
+        "ok": true
+      }
+    },
+    "management_hosts": [
+      {
+        "host": "192.168.99.2",
+        "ping": {
+          "host": "192.168.99.2",
+          "success": false,
+          "packet_loss_percent": 100.0,
+          "avg_ms": null,
+          "raw": {
+            "command": "ping -c 4 192.168.99.2",
+            "returncode": 2,
+            "stdout": "PING 192.168.99.2 (192.168.99.2): 56 data bytes\nRequest timeout for icmp_seq 0\nRequest timeout for icmp_seq 1\nRequest timeout for icmp_seq 2\n\n--- 192.168.99.2 ping statistics ---\n4 packets transmitted, 0 packets received, 100.0% packet loss",
+            "stderr": "",
+            "ok": false
+          }
+        },
+        "ports": {
+          "host": "192.168.99.2",
+          "ports": [
+            80,
+            443
+          ],
+          "states": {
+            "80": "filtered",
+            "443": "filtered"
+          },
+          "raw": {
+            "command": "nmap -Pn -p 80,443 192.168.99.2",
+            "returncode": 0,
+            "stdout": "Starting Nmap 7.99 ( https://nmap.org ) at 2026-04-29 17:36 +0200\nNmap scan report for 192.168.99.2\nHost is up.\n\nPORT    STATE    SERVICE\n80/tcp  filtered http\n443/tcp filtered https\n\nNmap done: 1 IP address (1 host up) scanned in 3.55 seconds",
+            "stderr": "",
+            "ok": true
+          }
+        }
+      },
+      {
+        "host": "192.168.99.3",
+        "ping": {
+          "host": "192.168.99.3",
+          "success": false,
+          "packet_loss_percent": 100.0,
+          "avg_ms": null,
+          "raw": {
+            "command": "ping -c 4 192.168.99.3",
+            "returncode": 2,
+            "stdout": "PING 192.168.99.3 (192.168.99.3): 56 data bytes\nRequest timeout for icmp_seq 0\nRequest timeout for icmp_seq 1\nRequest timeout for icmp_seq 2\n\n--- 192.168.99.3 ping statistics ---\n4 packets transmitted, 0 packets received, 100.0% packet loss",
+            "stderr": "",
+            "ok": false
+          }
+        },
+        "ports": {
+          "host": "192.168.99.3",
+          "ports": [
+            80,
+            443
+          ],
+          "states": {
+            "80": "filtered",
+            "443": "filtered"
+          },
+          "raw": {
+            "command": "nmap -Pn -p 80,443 192.168.99.3",
+            "returncode": 0,
+            "stdout": "Starting Nmap 7.99 ( https://nmap.org ) at 2026-04-29 17:36 +0200\nNmap scan report for 192.168.99.3\nHost is up.\n\nPORT    STATE    SERVICE\n80/tcp  filtered http\n443/tcp filtered https\n\nNmap done: 1 IP address (1 host up) scanned in 3.55 seconds",
+            "stderr": "",
+            "ok": true
+          }
+        }
+      }
+    ],
+    "arp": {
+      "count": 5,
+      "ips": [
+        "192.168.20.1",
+        "192.168.20.101",
+        "192.168.20.255",
+        "224.0.0.251",
+        "239.255.255.250"
+      ],
+      "raw": {
+        "command": "arp -a",
+        "returncode": 0,
+        "stdout": "? (192.168.20.1) at 6c:4c:bc:a8:aa:3c on en0 ifscope [ethernet]\n? (192.168.20.101) at 86:e1:bb:53:7e:97 on en0 ifscope permanent [ethernet]\n? (192.168.20.255) at ff:ff:ff:ff:ff:ff on en0 ifscope [ethernet]\nmdns.mcast.net (224.0.0.251) at 1:0:5e:0:0:fb on en0 ifscope permanent [ethernet]\n? (239.255.255.250) at 1:0:5e:7f:ff:fa on en0 ifscope permanent [ethernet]",
+        "stderr": "",
+        "ok": true
+      }
+    },
+    "discovery": {
+      "subnet": "192.168.20.0/24",
+      "hosts_up": 1,
+      "hosts": [
+        "192.168.20.1"
+      ],
+      "raw": {
+        "command": "nmap -sn -n 192.168.20.0/24",
+        "returncode": 0,
+        "stdout": "Starting Nmap 7.99 ( https://nmap.org ) at 2026-04-29 17:37 +0200\nNmap scan report for 192.168.20.1\nHost is up (0.068s latency).\nNmap done: 256 IP addresses (1 host up) scanned in 1.22 seconds",
+        "stderr": "",
+        "ok": true
+      }
+    },
+    "profile": "hardened_internal"
+  },
+  "observed": {
+    "auth_mode": "wpa3_transition",
+    "wps_disabled": true,
+    "vlans_present": [
+      20,
+      30,
+      99
+    ],
+    "management_network_configured": true,
+    "ssid_to_vlan_mapping": {
+      "SME-Internal": 20,
+      "SME-Guest": 30
+    }
+  },
+  "category_scores": {
+    "authentication_and_encryption": 2,
+    "management_access_control": 2,
+    "network_segmentation": 3,
+    "network_exposure": 2,
+    "known_insecure_features_or_vulnerabilities": 3
+  },
+  "weighted_scores": {
+    "categories": {
+      "authentication_and_encryption": {
+        "score": 2,
+        "weight": 3,
+        "weighted_value": 6
+      },
+      "management_access_control": {
+        "score": 2,
+        "weight": 3,
+        "weighted_value": 6
+      },
+      "network_segmentation": {
+        "score": 3,
+        "weight": 2,
+        "weighted_value": 6
+      },
+      "network_exposure": {
+        "score": 2,
+        "weight": 2,
+        "weighted_value": 4
+      },
+      "known_insecure_features_or_vulnerabilities": {
+        "score": 3,
+        "weight": 3,
+        "weighted_value": 9
+      }
+    },
+    "total": 31,
+    "max_score": 39,
+    "percentage_of_max": 79.5
+  }
+}

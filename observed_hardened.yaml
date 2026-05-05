@@ -1,4 +1,4 @@
-auth_mode: "wpa3_transition"
+auth_mode: "wpa3_only"
 wps_disabled: true
 vlans_present: [20, 30, 99]
 management_network_configured: true
